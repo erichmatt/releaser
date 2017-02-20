@@ -66,6 +66,7 @@ def tank_empty(event):
         f.close()
         pump_start_time = 0
         try:
+            print('trying to open login')
             with open('login') as up:
                 login = up.readlines()
             up.close()
