@@ -65,6 +65,10 @@ def tank_empty(event):
         f.write('pump stop,'+time.strftime("%Y-%m-%d,%X,"+str(round(pump_run_time,2))+',pump_interval,'+str(round(pump_interval/60,2))+',gallons per hour,'+str(round(flow_rate,2))+'\n'))
         f.close()
         pump_start_time = 0
+        with open('login') as up:
+            login = up.readlines()
+        up.close()
+        print(login)
         try:
             print('trying to open login')
             with open('login') as up:
