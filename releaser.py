@@ -65,25 +65,11 @@ def tank_empty(event):
         f.write('pump stop,'+time.strftime("%Y-%m-%d,%X,"+str(round(pump_run_time,2))+',pump_interval,'+str(round(pump_interval/60,2))+',gallons per hour,'+str(round(flow_rate,2))+'\n'))
         f.close()
         pump_start_time = 0
-        with open('login') as up:
-            login = up.readlines()
-        up.close()
-        session = ftplib.FTP_TLS('mattsrepair.com',login[0],login[1])
-        f = open('/home/pi/releaser/index.html',"w")
-        f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
-        f.close()
-        file = open('/home/pi/releaser/index.html','rb')                  # file to send
-        session.storbinary('STOR index.html', file)     # send the file
-        file.close()                                    # close file
-        file = open('/home/pi/releaser/pump_times.csv','rb')
-        session.storbinary('STOR pump_times.csv', file)
-        file.close()
-        session.quit()
         try:
             with open('login') as up:
                 login = up.readlines()
             up.close()
-            session = ftplib.FTP_TLS('mattsrepair.com',login[0],login[1])
+            session = ftplib.FTP_TLS('mattsrepair.com','sapreleaser',login[1])
             f = open('/home/pi/releaser/index.html',"w")
             f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
             f.close()
