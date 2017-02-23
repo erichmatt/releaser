@@ -20,11 +20,11 @@ def tank_full(event):
         if pfd.input_pins[1].value == 1:
             pfd.leds[0].turn_on() #Turn on Releaser pump
             f = open('/home/pi/releaser/pump_times.csv',"a")
-            f.write('Auto pump start,'+time.strftime("%Y-%m-%d,%X,")+',,,,\n')
+            f.write(time.strftime("%Y-%m-%d-%X,")+'Auto Pump Start,'+',,\n')
             f.close()
         else:
             f = open('/home/pi/releaser/error.log',"a")
-            f.write(time.strftime("%y-%m-%d,%X,")+'Auto start when tank was not empty \n')
+            f.write(time.strftime("%y-%m-%d-%X,")+'Auto start when tank was not empty \n')
             f.close()
 def manual_pump(event):
     global pump_start_time
@@ -36,11 +36,11 @@ def manual_pump(event):
     if pfd.input_pins[1].value == 1:
         pfd.leds[0].turn_on() #Turn on Releaser Pump
         f = open('/home/pi/releaser/pump_times.csv',"a")
-        f.write('Manual pump start,'+time.strftime("%Y-%m-%d,%X,")+',,,,\n')
+        f.write(time.strftime("%Y-%m-%d-%X,")+'Manual Pump Start,'+',,\n')
         f.close()
     else:
         f = open('/home/pi/releaser/error.log',"a")
-        f.write(time.strftime("%Y-%m-%d,%X,")+'Manual start when tank was not empty \n')
+        f.write(time.strftime("%Y-%m-%d-%X,")+'Manual start when tank was not empty \n')
         f.close       
 def tank_empty(event):
     if pfd.leds[0].value == 1:
@@ -62,7 +62,7 @@ def tank_empty(event):
         else:
             pump_run_time = 0
         f = open('/home/pi/releaser/pump_times.csv',"a")
-        f.write('pump stop,'+time.strftime("%Y-%m-%d,%X,"+str(round(pump_run_time,2))+',pump_interval,'+str(round(pump_interval/60,2))+',gallons per hour,'+str(round(flow_rate,2))+'\n'))
+        f.write(time.strftime("%Y-%m-%d-%X,"+'Pump Stop,'+str(round(pump_run_time,2))+','+str(round(pump_interval/60,2))+','+str(round(flow_rate,2))+'\n'))
         f.close()
         pump_start_time = 0
         try:
