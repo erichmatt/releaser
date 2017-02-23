@@ -69,7 +69,7 @@ def tank_empty(event):
             with open('login') as up:
                 login = up.readlines()
             up.close()
-            session = ftplib.FTP('mattsrepair.com',login[0],login[1])
+            session = ftplib.FTP_TLS('mattsrepair.com','sapreleaser',login[1])
             f = open('/home/pi/releaser/index.html',"w")
             f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
             f.close()
