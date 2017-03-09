@@ -80,10 +80,10 @@ def tank_empty(event):
             session.storbinary('STOR pump_times.csv', file)
             file.close()
             session.quit()
-        except:
-            print ("failed to upload")
+        except Exception, e:
+            print ("failed to upload: %s" % e)
             f = open('/home/pi/releaser/error.log',"a")
-            f.write('failed to upload \n')
+            f.write(time.strftime("%Y-%m-%d-%X,"+'failed to upload \n')
             f.close()
 
 if __name__ == "__main__":
