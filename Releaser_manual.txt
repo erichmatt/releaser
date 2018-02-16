@@ -1,0 +1,26 @@
+Raspberry Pi login: pin  (ssh pi@*ip* )
+Raspberry Pi Password: motorcycle
+
+piface inputs
+0 Red = Tank Full 
+1 White = Tank Empty
+2 White = Manual Start
+
+Piface Outputs
+0 Blue = Pump on
+0 ?? = Red LED to show pump is on
+1 (NA) = Vac Pump (for future use)
+2 ?? = Green LED to show program is running
+
+File locations
+
+Script to start program:  /etc/init.d/sap_releaser
+Program location:  /usr/local/bin/releaser.py
+CSV file Of pump times: ~/releaser/pump_times.csv
+HTML file: ~/releaser/index.html
+Program versions: ~/Documents/Pi Sync/pithon/Sap Releaser
+
+Web links
+
+www.mattsmaplesyrup.com/releaser
+www.mattsmaplesyrup.com/releaser/pump_times.html
