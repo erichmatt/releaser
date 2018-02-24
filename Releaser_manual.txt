@@ -25,4 +25,4 @@ Program versions: ~/Documents/Pi Sync/pithon/Sap Releaser
 Web links
 
 www.mattsmaplesyrup.com/releaser
-www.mattsmaplesyrup.com/releaser/pump_times.html
+www.mattsmaplesyrup.com/releaser/table
