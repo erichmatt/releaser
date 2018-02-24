@@ -16,6 +16,8 @@ File locations
 
 Script to start program:  /etc/init.d/sap_releaser
 Program location:  /usr/local/bin/releaser.py
+Start service using: service sap_releaser start
+Stop service using: service sap_releaser stop
 CSV file Of pump times: ~/releaser/pump_times.csv
 HTML file: ~/releaser/index.html
 Program versions: ~/Documents/Pi Sync/pithon/Sap Releaser
