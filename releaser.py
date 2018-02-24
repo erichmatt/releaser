@@ -66,7 +66,7 @@ def tank_empty(event):
         f.close()
         pump_start_time = 0
         try:
-            session = ftplib.FTP('volcano.dreamhost.com', 'dh_m958u5', 'Aa91*%DbH&')
+            session = ftplib.FTP('volcano.dreamhost.com', 'dh_m958u5', 'password')
             session.cwd('mattsmaplesyrup.com/releaser')
             f = open('/home/pi/releaser/index.html',"w")
             f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
