@@ -62,7 +62,7 @@ def tank_empty(event):
         else:
             pump_run_time = 0
         f = open('/home/pi/releaser/pump_times.csv',"a")
-        f.write(time.strftime("%Y-%m-%d-%X,")+'Pump Stop,'+str(round(pump_run_time,2))+','+str(round(pump_interval/60,2))+','+str(round(flow_rate,2))+'\n'))
+        f.write(time.strftime("%Y-%m-%d-%X,")+'Pump Stop,'+str(round(pump_run_time,2))+','+str(round(pump_interval/60,2))+','+str(round(flow_rate,2))+'\n')
         f.close()
         pump_start_time = 0
         try:
