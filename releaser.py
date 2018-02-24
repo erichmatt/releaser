@@ -66,9 +66,6 @@ def tank_empty(event):
         f.close()
         pump_start_time = 0
         try:
-            with open('login') as up:
-                login = up.readlines()
-            up.close()
             session = ftplib.FTP('volcano.dreamhost.com', 'dh_m958u5', 'Aa91*%DbH&')
             session.cwd('mattsmaplesyrup.com/releaser')
             f = open('/home/pi/releaser/index.html',"w")
