@@ -1,4 +1,5 @@
 #!/usr/bin/env python
 import subprocess
-
-rc = subprocess.call("uploadtest.sh")
+print "start"
+subprocess.call("./uploadtest.sh", shell=True)
+print "end"
