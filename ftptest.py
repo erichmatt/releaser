@@ -3,7 +3,7 @@ import ftplib
 import pysftp
 import time
 
-#with pysftp.Connection('vps10240.dreamhostps.com', username='dh_m958u5', password='AFmI9R!L!3y8') as sftp:
+#with pysftp.Connection('vps10240.dreamhostps.com', username='dh_m958u5', password='password') as sftp:
 #    with sftp.cd('mattsmaplesyrup.com/releaser'):
 #        sftp.put('testfile.csv')
 
