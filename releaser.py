@@ -1,17 +1,8 @@
 #!/usr/bin/env python
-import ftplib
-import pysftp
-import paramiko
+import subprocess
 import pifacedigitalio
 import time
 from time import sleep
-
-hostname='vps10240.dreamhostps.com'
-username='dh_m958u5'
-password='password'
-port=22
-source= 'testfile.csv' 
-destination ='mattsmaplesyrup.com/releaser/testfile.csv'
 
 DELAY = 1.0 # seconds
 count = 0
@@ -78,14 +69,7 @@ def tank_empty(event):
         f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
         f.close()
         try:
-            #SFTP
-            #client.load_system_host_keys()
-            t = paramiko.Transport((hostname, port)) 
-            t.connect(username=username,password=password)
-            sftp = paramiko.SFTPClient.from_transport(t)
-            sftp.put(source,destination)
-            sftp.close()
-            t.close()
+            subprocess.call("./uploadtest.sh", shell=True)
         except Exception, e:
             print ("failed to upload: %s" % e)
             f = open('/home/pi/releaser/error.log',"a")
