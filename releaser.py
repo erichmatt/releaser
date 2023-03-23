@@ -1,8 +1,17 @@
 #!/usr/bin/env python
 import ftplib
+import pysftp
+import paramiko
 import pifacedigitalio
 import time
 from time import sleep
+
+hostname='vps10240.dreamhostps.com'
+username='dh_m958u5'
+password='password'
+port=22
+source= 'testfile.csv' 
+destination ='mattsmaplesyrup.com/releaser/testfile.csv'
 
 DELAY = 1.0 # seconds
 count = 0
@@ -65,19 +74,18 @@ def tank_empty(event):
         f.write(time.strftime("%Y-%m-%d-%X,")+'Pump Stop,'+str(round(pump_run_time,2))+','+str(round(pump_interval/60,2))+','+str(round(flow_rate,2))+'\n')
         f.close()
         pump_start_time = 0
+        f = open('/home/pi/releaser/index.html',"w")
+        f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
+        f.close()
         try:
-            session = ftplib.FTP('volcano.dreamhost.com', 'dh_m958u5', 'password')
-            session.cwd('mattsmaplesyrup.com/releaser')
-            f = open('/home/pi/releaser/index.html',"w")
-            f.write('<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN"> \n <HTML> \n<HEAD>\n <TITLE> \n Sap Releaser \n </TITLE> \n </HEAD> \n <BODY>\n  <P>Pumped for '+str(pump_run_time)+' Sec At '+time.strftime("%Y-%m-%d, %X,")+' Time between pumps: '+str(pump_interval/60)+' Vacuum pump is '+vacuum_status+'</P> \n </BODY> \n </HTML>')
-            f.close()
-            file = open('/home/pi/releaser/index.html','rb')                  # file to send
-            session.storbinary('STOR index.html', file)     # send the file
-            file.close()                                    # close file
-            file = open('/home/pi/releaser/pump_times.csv','rb')
-            session.storbinary('STOR pump_times.csv', file)
-            file.close()
-            session.quit()
+            #SFTP
+            #client.load_system_host_keys()
+            t = paramiko.Transport((hostname, port)) 
+            t.connect(username=username,password=password)
+            sftp = paramiko.SFTPClient.from_transport(t)
+            sftp.put(source,destination)
+            sftp.close()
+            t.close()
         except Exception, e:
             print ("failed to upload: %s" % e)
             f = open('/home/pi/releaser/error.log',"a")
