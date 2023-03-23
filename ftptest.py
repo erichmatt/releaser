@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 import subprocess
 
-rc = subprocess.call("~/btsync/uploadtest.sh")
+rc = subprocess.call("uploadtest.sh")
